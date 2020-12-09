@@ -7,8 +7,8 @@ function diff(){
     block_number = parseInt($('#block_number').val())
     // min = $('#min').val()
     // max = $('#max').val()
-    let e = ee();
-    console.log(e)
+    let dd = ee();
+    console.log(dd,'dfasdfa')
     $('#result').text('일반 홀 : '+e.normal_one+'일반 짝 : '+e.normal_zero)
     $('#result2').text('파워 홀 : '+e.power_one+'파워 짝 : '+e.power_zero)
 } 
