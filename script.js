@@ -8,8 +8,9 @@ function diff(){
     // min = $('#min').val()
     // max = $('#max').val()
     let e = ee();
-    $('#result').text('일반 홀 : '+e.normal_one+'일반 짝 : '+e.normal_zero+'파워 홀 : '+e.power_one+'파워 짝 : '+e.power_zero)
-}
+    let ss = $('#result').text('일반 홀 : '+e.normal_one+'일반 짝 : '+e.normal_zero+'\n'+'파워 홀 : '+e.power_one+'파워 짝 : '+e.power_zero)
+    obj.html(obj.html().replace(/\n/g,'<br/>'));
+} 
 
 async function ee() { // 함수 앞에 async 라는 키워드를 붙입니다.
     try{
