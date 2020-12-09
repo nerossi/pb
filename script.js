@@ -46,10 +46,9 @@ async function ee() { // 함수 앞에 async 라는 키워드를 붙입니다.
         }else if (power_one < power_zero){
             result.power = "짝"
         }
-        return {'normal_one':normal_one,'normal_zero':normal_zero,'power_one':power_one,'power_zero':power_zero}
-
         console.log('일반 홀',normal_one,'일반 짝',normal_zero)
         console.log('파워 홀',power_one,'파워 짝',power_zero)
+        return {'normal_one':normal_one,'normal_zero':normal_zero,'power_one':power_one,'power_zero':power_zero}
     }catch(e){
         console.log(e)
     }
