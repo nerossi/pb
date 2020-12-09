@@ -9,9 +9,11 @@ async function diff(){
     // max = $('#max').val()
     let dd = await ee();
     let persent_normal = Math.floor(dd.normal_one/(dd.normal_one+dd.normal_zero)*100)
+    let persent_normal2 = Math.floor(dd.normal_zero/(dd.normal_one+dd.normal_zero)*100)
     let persent_power = Math.floor(dd.power_one/(dd.power_one+dd.power_zero)*100)
-    $('#result').text('일반 홀 : '+dd.normal_one+'('+persent_normal+'%)'+' 일반 짝 : '+dd.normal_zero)
-    $('#result2').text('파워 홀 : '+dd.power_one+'('+persent_power+'%)'+' 파워 짝 : '+dd.power_zero)
+    let persent_power2 = Math.floor(dd.power_zero/(dd.power_one+dd.power_zero)*100)
+    $('#result').text('일반 홀 : '+dd.normal_one+'('+persent_normal+'%)'+' 일반 짝 : '+dd.normal_zero+'('+persent_normal2+'%)')
+    $('#result2').text('파워 홀 : '+dd.power_one+'('+persent_power+'%)'+' 파워 짝 : '+dd.power_zero+dd.power_one+'('+persent_power2+'%)')
 } 
 
 async function ee() { // 함수 앞에 async 라는 키워드를 붙입니다.
