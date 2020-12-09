@@ -8,7 +8,8 @@ function diff(){
     // min = $('#min').val()
     // max = $('#max').val()
     let e = ee();
-    let ss = $('#result').text('일반 홀 : '+e.normal_one+'일반 짝 : '+e.normal_zero+'\n'+'파워 홀 : '+e.power_one+'파워 짝 : '+e.power_zero)
+    $('#result').text('일반 홀 : '+e.normal_one+'일반 짝 : '+e.normal_zero)
+    $('#result2').text('파워 홀 : '+e.power_one+'파워 짝 : '+e.power_zero)
     obj.html(obj.html().replace(/\n/g,'<br/>'));
 } 
 
