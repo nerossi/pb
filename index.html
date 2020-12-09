@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="/script.js"></script>
     <title>POWER BALL</title>
 </head>
 <body>
     <div>과연 맞출까요?</div>
     <div class="setting">
-        <input id="block_number" type="text">
-        <input id="min" type="text">
-        <input id="max" type="text">
+        <input id="block_number" type="number">
+        <!-- <input id="min" type="text">
+        <input id="max" type="text"> -->
+        <div onclick="diff()">예측하기</div>
     </div>
+    <div id="result"></div>
 </body>
 </html>
