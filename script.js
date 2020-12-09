@@ -3,11 +3,11 @@ let block_number = 0;
 let min = 15;
 let max = 40;
 
-function diff(){
+async function diff(){
     block_number = parseInt($('#block_number').val())
     // min = $('#min').val()
     // max = $('#max').val()
-    let dd = ee();
+    let dd = await ee();
     console.log(dd,'dfasdfa')
     $('#result').text('일반 홀 : '+dd.normal_one+'일반 짝 : '+dd.normal_zero)
     $('#result2').text('파워 홀 : '+dd.power_one+'파워 짝 : '+dd.power_zero)
