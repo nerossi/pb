@@ -129,7 +129,7 @@ function normalBallUnderOver(arr){
 }
 
 function PowerUnderOver(num){
-    if(num < 5){
+    if(num < 4.5){
         return 0;
     }else{
         return 1;
