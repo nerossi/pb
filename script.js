@@ -4,16 +4,25 @@ let min = 15;
 let max = 40;
 
 async function diff(){
+    $('#result5').empty();
     block_number = parseInt($('#block_number').val())
-    // min = $('#min').val()
-    // max = $('#max').val()
+    min = parseInt($('#min').val())
+    max = parseInt($('#max').val())
     let dd = await ee();
     let persent_normal = Math.floor(dd.normal_one/(dd.normal_one+dd.normal_zero)*100)
     let persent_normal2 = Math.floor(dd.normal_zero/(dd.normal_one+dd.normal_zero)*100)
     let persent_power = Math.floor(dd.power_one/(dd.power_one+dd.power_zero)*100)
     let persent_power2 = Math.floor(dd.power_zero/(dd.power_one+dd.power_zero)*100)
+
+    let persent_n_under = Math.floor(dd.normal_under/(dd.normal_under+dd.normal_over)*100)
+    let persent_n_over = Math.floor(dd.normal_over/(dd.normal_under+dd.normal_over)*100)
+    let persent_p_under = Math.floor(dd.power_under/(dd.power_under+dd.power_over)*100)
+    let persent_p_over = Math.floor(dd.power_over/(dd.power_under+dd.power_over)*100)
+
     $('#result').text('일반 홀 : '+dd.normal_one+'('+persent_normal+'%)'+' 일반 짝 : '+dd.normal_zero+'('+persent_normal2+'%)')
     $('#result2').text('파워 홀 : '+dd.power_one+'('+persent_power+'%)'+' 파워 짝 : '+dd.power_zero+'('+persent_power2+'%)')
+    $('#result3').text('일반 언더 : '+dd.normal_under+'('+persent_n_under+'%)'+' 일반 오버 : '+dd.normal_over+'('+persent_n_over+'%)')
+    $('#result4').text('파워 언더 : '+dd.power_under+'('+persent_p_under+'%)'+' 파워 오버 : '+dd.power_over+'('+persent_p_over+'%)')
 } 
 
 async function ee() { // 함수 앞에 async 라는 키워드를 붙입니다.
@@ -23,8 +32,14 @@ async function ee() { // 함수 앞에 async 라는 키워드를 붙입니다.
         let normal_one = 0;
         let power_zero = 0;
         let power_one = 0;
+        let normal_under = 0;
+        let normal_over = 0;
+        let power_under = 0;
+        let power_over = 0;
+        let numbers = [];
+
         let result = { normal : '', power : ''}
-        for(y=min; y < max; y++){
+        for(y=min; y < max+1; y++){
             console.log(min,max,y,'---------------------------------------------')
             let test = await main_e(block_number,y);
             if(test.normal == 0){
@@ -38,6 +53,20 @@ async function ee() { // 함수 앞에 async 라는 키워드를 붙입니다.
             }else if(test.power == 1){
                 power_one++
             }
+
+            if(test.normal_unob == 0){
+                normal_under++
+            }else if(test.normal_unob == 1){
+                normal_over++
+            }
+
+            if(test.power_unob == 0){
+                power_under++
+            }else if(test.power_unob == 1){
+                power_over++
+            }
+
+            $('#result5').append('트랜잭션('+y+') :'+test.numbers+'<br>')
         }
         if(normal_one > normal_zero){
             result.normal = "홀"
@@ -51,7 +80,16 @@ async function ee() { // 함수 앞에 async 라는 키워드를 붙입니다.
         }
         console.log('일반 홀',normal_one,'일반 짝',normal_zero)
         console.log('파워 홀',power_one,'파워 짝',power_zero)
-        return {'normal_one':normal_one,'normal_zero':normal_zero,'power_one':power_one,'power_zero':power_zero}
+        return {
+            'normal_one':normal_one,
+            'normal_zero':normal_zero,
+            'power_one':power_one,
+            'power_zero':power_zero,
+            'normal_under' : normal_under,
+            'normal_over' : normal_over,
+            'power_under' : power_under,
+            'power_over' : power_over
+        }
     }catch(e){
         console.log(e)
     }
@@ -61,21 +99,48 @@ async function main_e(block_number,transaction){
     return new Promise((r)=>{
         //블록,트랜잭션,생성개수,맥스넘버
         let a = createNumberSet(block_number,transaction,5,28)
-        let b = nomalBall(a)
+        let b = normalBall(a)
         let c = powerBall(a[a.length - 1])
+        let d = normalBallUnderOver(a)
+        let e = PowerUnderOver(a[a.length - 1])
         // console.log(a)
         // console.log(b)
         // console.log(c)
-        return r({normal:b,power:c})
+        return r({
+            normal:b,
+            power:c,
+            normal_unob:d,
+            power_unob:e,
+            numbers:a
+        })
     })
 }
 
+function normalBallUnderOver(arr){
+    number = 0;
+    for(i=0; i<arr.length-1; i++){
+        number = number + arr[i]
+    }
+    if(number < 72.5){
+        return 0;
+    }else{
+        return 1;
+    }
+}
+
+function PowerUnderOver(num){
+    if(num < 5){
+        return 0;
+    }else{
+        return 1;
+    }
+}
 
 function getRandomInt(min, max) { //min ~ max 사이의 임의의 정수 반환
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function nomalBall(arr){
+function normalBall(arr){
     let number = 0;
     for(i=0; i<arr.length-1; i++){
         number = number + arr[i]
