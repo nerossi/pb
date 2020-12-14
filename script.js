@@ -102,7 +102,7 @@ async function main_e(block_number,transaction){
         let temp_hash = SHA256(block_number + '' + transaction);
         temp_hash = temp_hash.slice(-5, temp_hash.length)
         let temp_result = temp_hash.toUpperCase()
-        $('#result5').append(''+temp_hash+'')
+        $('#result5').append(''+temp_result+'')
         //블록,트랜잭션,생성개수,맥스넘버
         let a = createNumberSet(block_number+temp_result,transaction,5,28)
         let b = normalBall(a)
