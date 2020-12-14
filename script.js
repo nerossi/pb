@@ -1,13 +1,13 @@
 
 let block_number = 0;
-let min = 15;
-let max = 40;
+let min = 0;
+let max = 100;
 
 async function diff(){
     $('#result5').empty();
     block_number = parseInt($('#block_number').val())
-    min = parseInt($('#min').val())
-    max = parseInt($('#max').val())
+    // min = parseInt($('#min').val())
+    // max = parseInt($('#max').val())
     let dd = await ee();
     let persent_normal = Math.floor(dd.normal_one/(dd.normal_one+dd.normal_zero)*100)
     let persent_normal2 = Math.floor(dd.normal_zero/(dd.normal_one+dd.normal_zero)*100)
@@ -18,11 +18,14 @@ async function diff(){
     let persent_n_over = Math.floor(dd.normal_over/(dd.normal_under+dd.normal_over)*100)
     let persent_p_under = Math.floor(dd.power_under/(dd.power_under+dd.power_over)*100)
     let persent_p_over = Math.floor(dd.power_over/(dd.power_under+dd.power_over)*100)
-
-    $('#result').text('일반 홀 : '+dd.normal_one+'('+persent_normal+'%)'+' 일반 짝 : '+dd.normal_zero+'('+persent_normal2+'%)')
-    $('#result2').text('파워 홀 : '+dd.power_one+'('+persent_power+'%)'+' 파워 짝 : '+dd.power_zero+'('+persent_power2+'%)')
-    $('#result3').text('일반 언더 : '+dd.normal_under+'('+persent_n_under+'%)'+' 일반 오버 : '+dd.normal_over+'('+persent_n_over+'%)')
-    $('#result4').text('파워 언더 : '+dd.power_under+'('+persent_p_under+'%)'+' 파워 오버 : '+dd.power_over+'('+persent_p_over+'%)')
+    $('#result').text('일반 홀 : '+persent_normal+'%'+' 일반 짝 : '+persent_normal2+'%')
+    $('#result2').text('파워 홀 : '+persent_power+'%'+' 파워 짝 : '+persent_power2+'%')
+    $('#result3').text('일반 언더 : '+persent_n_under+'%'+' 일반 오버 : '+persent_n_over+'%')
+    $('#result4').text('파워 언더 : '+persent_p_under+'%'+' 파워 오버 : '+persent_p_over+'%')
+    // $('#result').text('일반 홀 : '+dd.normal_one+'('+persent_normal+'%)'+' 일반 짝 : '+dd.normal_zero+'('+persent_normal2+'%)')
+    // $('#result2').text('파워 홀 : '+dd.power_one+'('+persent_power+'%)'+' 파워 짝 : '+dd.power_zero+'('+persent_power2+'%)')
+    // $('#result3').text('일반 언더 : '+dd.normal_under+'('+persent_n_under+'%)'+' 일반 오버 : '+dd.normal_over+'('+persent_n_over+'%)')
+    // $('#result4').text('파워 언더 : '+dd.power_under+'('+persent_p_under+'%)'+' 파워 오버 : '+dd.power_over+'('+persent_p_over+'%)')
 } 
 
 async function ee() { // 함수 앞에 async 라는 키워드를 붙입니다.
@@ -66,7 +69,6 @@ async function ee() { // 함수 앞에 async 라는 키워드를 붙입니다.
                 power_over++
             }
 
-            $('#result5').append('트랜잭션('+y+') :'+test.numbers+'<br>')
         }
         if(normal_one > normal_zero){
             result.normal = "홀"
@@ -97,6 +99,10 @@ async function ee() { // 함수 앞에 async 라는 키워드를 붙입니다.
 
 async function main_e(block_number,transaction){
     return new Promise((r)=>{
+        let temp_hash = SHA256(block_number + '' + transaction);
+        temp_hash = temp_hash.slice(-5, temp_hash.length)
+        temp_hash = temp_hash.toUpperCase()
+        $('#result5').append(''+temp_hash+'')
         //블록,트랜잭션,생성개수,맥스넘버
         let a = createNumberSet(block_number,transaction,5,28)
         let b = normalBall(a)
