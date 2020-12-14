@@ -211,7 +211,8 @@ function powerBall(num){
  */
 function createNumberSet(eos_block, eos_tran, entry, max_number, start_cnt = 1) {
     eos_tran = eos_tran ? eos_tran : '';
-    let eos_value = eos_block + '' + eos_tran;
+    let eos_value = eos_block + '';
+    //let eos_value = eos_block + '' + eos_tran;
     let hashs = [];
     let numbers = [];
     let count = 0;
