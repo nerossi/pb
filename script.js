@@ -1,7 +1,7 @@
 
 let block_number = 0;
 let min = 0;
-let max = 100;
+let max = 99;
 
 async function diff(){
     $('#result5').empty();
