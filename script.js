@@ -18,10 +18,15 @@ async function diff(){
     let persent_n_over = Math.floor(dd.normal_over/(dd.normal_under+dd.normal_over)*100)
     let persent_p_under = Math.floor(dd.power_under/(dd.power_under+dd.power_over)*100)
     let persent_p_over = Math.floor(dd.power_over/(dd.power_under+dd.power_over)*100)
+
+    let persent_small = Math.floor(dd.small/(dd.small+dd.midium+dd.large)*100)
+    let persent_midium = Math.floor(dd.midium/(dd.small+dd.midium+dd.large)*100)
+    let persent_large = Math.floor(dd.large/(dd.small+dd.midium+dd.large)*100)
     $('#result').text('일반 홀 : '+persent_normal+'%'+' 일반 짝 : '+persent_normal2+'%')
     $('#result2').text('파워 홀 : '+persent_power+'%'+' 파워 짝 : '+persent_power2+'%')
     $('#result3').text('일반 언더 : '+persent_n_under+'%'+' 일반 오버 : '+persent_n_over+'%')
     $('#result4').text('파워 언더 : '+persent_p_under+'%'+' 파워 오버 : '+persent_p_over+'%')
+    $('#result5').text('소 : '+persent_small+'%'+' 중 : '+persent_midium+'%'+' 대 : '+persent_large+'%')
     // $('#result').text('일반 홀 : '+dd.normal_one+'('+persent_normal+'%)'+' 일반 짝 : '+dd.normal_zero+'('+persent_normal2+'%)')
     // $('#result2').text('파워 홀 : '+dd.power_one+'('+persent_power+'%)'+' 파워 짝 : '+dd.power_zero+'('+persent_power2+'%)')
     // $('#result3').text('일반 언더 : '+dd.normal_under+'('+persent_n_under+'%)'+' 일반 오버 : '+dd.normal_over+'('+persent_n_over+'%)')
@@ -39,6 +44,9 @@ async function ee() { // 함수 앞에 async 라는 키워드를 붙입니다.
         let normal_over = 0;
         let power_under = 0;
         let power_over = 0;
+        let small = 0;
+        let midium = 0;
+        let large = 0;
         let numbers = [];
 
         let result = { normal : '', power : ''}
@@ -69,6 +77,14 @@ async function ee() { // 함수 앞에 async 라는 키워드를 붙입니다.
                 power_over++
             }
 
+            if(test.smallTolarge == 0){
+                small++
+            }else if(test.smallTolarge == 1){
+                midium++
+            }else if(test.smallTolarge == 2){
+                large++
+            }
+
         }
         if(normal_one > normal_zero){
             result.normal = "홀"
@@ -90,7 +106,10 @@ async function ee() { // 함수 앞에 async 라는 키워드를 붙입니다.
             'normal_under' : normal_under,
             'normal_over' : normal_over,
             'power_under' : power_under,
-            'power_over' : power_over
+            'power_over' : power_over,
+            'small' : small,
+            'midium' : midium,
+            'large' : large
         }
     }catch(e){
         console.log(e)
@@ -109,6 +128,7 @@ async function main_e(block_number,transaction){
         let c = powerBall(a[a.length - 1])
         let d = normalBallUnderOver(a)
         let e = PowerUnderOver(a[a.length - 1])
+        let f = smallTolarge(a)
         // console.log(a)
         // console.log(b)
         // console.log(c)
@@ -117,9 +137,23 @@ async function main_e(block_number,transaction){
             power:c,
             normal_unob:d,
             power_unob:e,
-            numbers:a
+            numbers:a,
+            smallTolarge:f
         })
     })
+}
+function smallTolarge(arr){
+    number = 0;
+    for(i=0; i<arr.length-1; i++){
+        number = number + arr[i]
+    }
+    if(number < 65){
+        return 0;
+    }else if(number < 81){
+        return 1;
+    }else if(number < 131){
+        return 2;
+    }
 }
 
 function normalBallUnderOver(arr){
