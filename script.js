@@ -1,11 +1,14 @@
 
 let block_number = 0;
+let block_number2 = 0;
 let min = 0;
 let max = 40;
 
 async function diff(){
     $('#result5').empty();
     block_number = parseInt($('#block_number').val())
+    block_number2 = parseInt($('#block_number').val()) - parseInt($('#block_number2').val())
+    console.log(block_number2)
     // min = parseInt($('#min').val())
     // max = parseInt($('#max').val())
     let dd = await ee();
@@ -35,7 +38,7 @@ async function diff(){
 
 async function ee() { // 함수 앞에 async 라는 키워드를 붙입니다.
     try{
-        block_number = block_number + 597;
+        block_number = block_number + block_number2
         let normal_zero = 0;
         let normal_one = 0;
         let power_zero = 0;
