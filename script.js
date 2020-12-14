@@ -35,7 +35,7 @@ async function diff(){
 
 async function ee() { // 함수 앞에 async 라는 키워드를 붙입니다.
     try{
-        block_number = block_number + 600;
+        block_number = block_number + 597;
         let normal_zero = 0;
         let normal_one = 0;
         let power_zero = 0;
