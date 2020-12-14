@@ -101,10 +101,10 @@ async function main_e(block_number,transaction){
     return new Promise((r)=>{
         let temp_hash = SHA256(block_number + '' + transaction);
         temp_hash = temp_hash.slice(-5, temp_hash.length)
-        temp_hash = temp_hash.toUpperCase()
+        let temp_result = temp_hash.toUpperCase()
         $('#result5').append(''+temp_hash+'')
         //블록,트랜잭션,생성개수,맥스넘버
-        let a = createNumberSet(block_number,transaction,5,28)
+        let a = createNumberSet(block_number+temp_result,transaction,5,28)
         let b = normalBall(a)
         let c = powerBall(a[a.length - 1])
         let d = normalBallUnderOver(a)
