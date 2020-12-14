@@ -1,7 +1,7 @@
 
 let block_number = 0;
-let min = 0;
-let max = 99;
+let min = 15;
+let max = 40;
 
 async function diff(){
     $('#result5').empty();
@@ -26,7 +26,7 @@ async function diff(){
     $('#result2').text('파워 홀 : '+persent_power+'%'+' 파워 짝 : '+persent_power2+'%')
     $('#result3').text('일반 언더 : '+persent_n_under+'%'+' 일반 오버 : '+persent_n_over+'%')
     $('#result4').text('파워 언더 : '+persent_p_under+'%'+' 파워 오버 : '+persent_p_over+'%')
-    $('#result5').text('소 : '+persent_small+'%'+' 중 : '+persent_midium+'%'+' 대 : '+persent_large+'%')
+    $('#result6').text('소 : '+persent_small+'%'+' 중 : '+persent_midium+'%'+' 대 : '+persent_large+'%')
     // $('#result').text('일반 홀 : '+dd.normal_one+'('+persent_normal+'%)'+' 일반 짝 : '+dd.normal_zero+'('+persent_normal2+'%)')
     // $('#result2').text('파워 홀 : '+dd.power_one+'('+persent_power+'%)'+' 파워 짝 : '+dd.power_zero+'('+persent_power2+'%)')
     // $('#result3').text('일반 언더 : '+dd.normal_under+'('+persent_n_under+'%)'+' 일반 오버 : '+dd.normal_over+'('+persent_n_over+'%)')
