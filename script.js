@@ -47,7 +47,7 @@ async function diff(){
     // $('#result4').text('파워 언더 : '+dd.power_under+'('+persent_p_under+'%)'+' 파워 오버 : '+dd.power_over+'('+persent_p_over+'%)')
 } 
 
-async function ee() { // 함수 앞에 async 라는 키워드를 붙입니다.
+async function ee() {
     try{
         block_number = block_number + block_number2
         console.log(block_number)
