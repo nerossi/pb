@@ -1,6 +1,6 @@
 
 let block_number = 0;
-let min = 15;
+let min = 0;
 let max = 40;
 
 async function diff(){
