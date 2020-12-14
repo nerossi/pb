@@ -12,24 +12,35 @@ async function diff(){
     // min = parseInt($('#min').val())
     // max = parseInt($('#max').val())
     let dd = await ee();
-    let persent_normal = (dd.normal_one/(dd.normal_one+dd.normal_zero)*100).toFixed(1)
-    let persent_normal2 = (dd.normal_zero/(dd.normal_one+dd.normal_zero)*100).toFixed(1)
-    let persent_power = (dd.power_one/(dd.power_one+dd.power_zero)*100).toFixed(1)
-    let persent_power2 = (dd.power_zero/(dd.power_one+dd.power_zero)*100).toFixed(1)
+    let persent_normal = (dd.normal_one/(dd.normal_one+dd.normal_zero)*100).toFixed(2)
+    let persent_normal2 = (dd.normal_zero/(dd.normal_one+dd.normal_zero)*100).toFixed(2)
+    let persent_power = (dd.power_one/(dd.power_one+dd.power_zero)*100).toFixed(2)
+    let persent_power2 = (dd.power_zero/(dd.power_one+dd.power_zero)*100).toFixed(2)
 
-    let persent_n_under = (dd.normal_under/(dd.normal_under+dd.normal_over)*100).toFixed(1)
-    let persent_n_over = (dd.normal_over/(dd.normal_under+dd.normal_over)*100).toFixed(1)
-    let persent_p_under = (dd.power_under/(dd.power_under+dd.power_over)*100).toFixed(1)
-    let persent_p_over = (dd.power_over/(dd.power_under+dd.power_over)*100).toFixed(1)
+    let persent_n_under = (dd.normal_under/(dd.normal_under+dd.normal_over)*100).toFixed(2)
+    let persent_n_over = (dd.normal_over/(dd.normal_under+dd.normal_over)*100).toFixed(2)
+    let persent_p_under = (dd.power_under/(dd.power_under+dd.power_over)*100).toFixed(2)
+    let persent_p_over = (dd.power_over/(dd.power_under+dd.power_over)*100).toFixed(2)
 
-    let persent_small = (dd.small/(dd.small+dd.midium+dd.large)*100).toFixed(1)
-    let persent_midium = (dd.midium/(dd.small+dd.midium+dd.large)*100).toFixed(1)
-    let persent_large = (dd.large/(dd.small+dd.midium+dd.large)*100).toFixed(1)
-    $('#result').text('일반 홀 : '+persent_normal+'%'+' 일반 짝 : '+persent_normal2+'%')
-    $('#result2').text('파워 홀 : '+persent_power+'%'+' 파워 짝 : '+persent_power2+'%')
-    $('#result3').text('일반 언더 : '+persent_n_under+'%'+' 일반 오버 : '+persent_n_over+'%')
-    $('#result4').text('파워 언더 : '+persent_p_under+'%'+' 파워 오버 : '+persent_p_over+'%')
+    let persent_small = (dd.small/(dd.small+dd.midium+dd.large)*100).toFixed(2)
+    let persent_midium = (dd.midium/(dd.small+dd.midium+dd.large)*100).toFixed(2)
+    let persent_large = (dd.large/(dd.small+dd.midium+dd.large)*100).toFixed(2)
+    //mirror
+    $('#result').text('일반 홀 : '+persent_normal2+'%'+' 일반 짝 : '+persent_normal+'%')
+    $('#result2').text('파워 홀 : '+persent_power2+'%'+' 파워 짝 : '+persent_power+'%')
+    $('#result3').text('일반 언더 : '+persent_n_over+'%'+' 일반 오버 : '+persent_n_under+'%')
+    $('#result4').text('파워 언더 : '+persent_p_over+'%'+' 파워 오버 : '+persent_p_under+'%')
     $('#result6').text('소 : '+persent_small+'%'+' 중 : '+persent_midium+'%'+' 대 : '+persent_large+'%')
+
+    //original
+    // $('#result').text('일반 홀 : '+persent_normal+'%'+' 일반 짝 : '+persent_normal2+'%')
+    // $('#result2').text('파워 홀 : '+persent_power+'%'+' 파워 짝 : '+persent_power2+'%')
+    //$('#result3').text('일반 언더 : '+persent_n_under+'%'+' 일반 오버 : '+persent_n_over+'%')
+    //$('#result4').text('파워 언더 : '+persent_p_under+'%'+' 파워 오버 : '+persent_p_over+'%')
+    // $('#result6').text('소 : '+persent_small+'%'+' 중 : '+persent_midium+'%'+' 대 : '+persent_large+'%')
+
+
+    //past
     // $('#result').text('일반 홀 : '+dd.normal_one+'('+persent_normal+'%)'+' 일반 짝 : '+dd.normal_zero+'('+persent_normal2+'%)')
     // $('#result2').text('파워 홀 : '+dd.power_one+'('+persent_power+'%)'+' 파워 짝 : '+dd.power_zero+'('+persent_power2+'%)')
     // $('#result3').text('일반 언더 : '+dd.normal_under+'('+persent_n_under+'%)'+' 일반 오버 : '+dd.normal_over+'('+persent_n_over+'%)')
@@ -39,6 +50,7 @@ async function diff(){
 async function ee() { // 함수 앞에 async 라는 키워드를 붙입니다.
     try{
         block_number = block_number + block_number2
+        console.log(block_number)
         let normal_zero = 0;
         let normal_one = 0;
         let power_zero = 0;
@@ -55,7 +67,15 @@ async function ee() { // 함수 앞에 async 라는 키워드를 붙입니다.
         let result = { normal : '', power : ''}
         for(y=min; y < max+1; y++){
             console.log(min,max,y,'---------------------------------------------')
-            let test = await main_e(block_number,y);
+            // let random_data = randomString()
+            // console.log(random_data)
+
+            let temp_hash = SHA256(''+ SHA256(''+block_number) + y);
+            temp_hash = temp_hash.slice(-5, temp_hash.length)
+            let temp_result = temp_hash.toUpperCase()
+            $('#result5').append(''+temp_result+'&')
+
+            let test = await main_e((block_number),temp_result);
             if(test.normal == 0){
                 normal_zero++
             }else if(test.normal == 1){
@@ -101,6 +121,9 @@ async function ee() { // 함수 앞에 async 라는 키워드를 붙입니다.
         }
         console.log('일반 홀',normal_one,'일반 짝',normal_zero)
         console.log('파워 홀',power_one,'파워 짝',power_zero)
+        console.log('일반 언더',normal_under,'일반 오버',normal_over)
+        console.log('파워 언더',power_under,'파워 오버',power_over)
+        console.log('대',large,'중',midium,'소',small)
         return {
             'normal_one':normal_one,
             'normal_zero':normal_zero,
@@ -121,12 +144,8 @@ async function ee() { // 함수 앞에 async 라는 키워드를 붙입니다.
 
 async function main_e(block_number,transaction){
     return new Promise((r)=>{
-        let temp_hash = SHA256(block_number + '' + transaction);
-        temp_hash = temp_hash.slice(-5, temp_hash.length)
-        let temp_result = temp_hash.toUpperCase()
-        $('#result5').append(''+temp_result+'')
         //블록,트랜잭션,생성개수,맥스넘버
-        let a = createNumberSet(block_number+temp_result,transaction,5,28)
+        let a = createNumberSet(block_number,transaction,5,28)
         let b = normalBall(a)
         let c = powerBall(a[a.length - 1])
         let d = normalBallUnderOver(a)
@@ -136,11 +155,11 @@ async function main_e(block_number,transaction){
         // console.log(b)
         // console.log(c)
         return r({
+            numbers:a,
             normal:b,
             power:c,
             normal_unob:d,
             power_unob:e,
-            numbers:a,
             smallTolarge:f
         })
     })
@@ -214,7 +233,7 @@ function powerBall(num){
  */
 function createNumberSet(eos_block, eos_tran, entry, max_number, start_cnt = 1) {
     eos_tran = eos_tran ? eos_tran : '';
-    let eos_value = eos_block + '';
+    let eos_value = eos_block + '' + eos_tran;
     //let eos_value = eos_block + '' + eos_tran;
     let hashs = [];
     let numbers = [];
@@ -411,4 +430,15 @@ function SHA256(s){
 
     s = Utf8Encode(s);
     return binb2hex(core_sha256(str2binb(s), s.length * chrsz));
+}
+
+function randomString() {
+    var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+    var string_length = 176;
+    var randomstring = '';
+    for (var i=0; i<string_length; i++) {
+        var rnum = Math.floor(Math.random() * chars.length);
+        randomstring += chars.substring(rnum,rnum+1);
+    }
+    return randomstring;
 }
