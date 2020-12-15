@@ -26,18 +26,18 @@ async function diff(){
     let persent_midium = (dd.midium/(dd.small+dd.midium+dd.large)*100).toFixed(2)
     let persent_large = (dd.large/(dd.small+dd.midium+dd.large)*100).toFixed(2)
     //mirror
-    $('#result').text('일반 홀 : '+persent_normal2+'%'+' 일반 짝 : '+persent_normal+'%')
-    $('#result2').text('파워 홀 : '+persent_power2+'%'+' 파워 짝 : '+persent_power+'%')
-    $('#result3').text('일반 언더 : '+persent_n_over+'%'+' 일반 오버 : '+persent_n_under+'%')
-    $('#result4').text('파워 언더 : '+persent_p_over+'%'+' 파워 오버 : '+persent_p_under+'%')
-    $('#result6').text('소 : '+persent_small+'%'+' 중 : '+persent_midium+'%'+' 대 : '+persent_large+'%')
+    // $('#result').text('일반 홀 : '+persent_normal2+'%'+' 일반 짝 : '+persent_normal+'%')
+    // $('#result2').text('파워 홀 : '+persent_power2+'%'+' 파워 짝 : '+persent_power+'%')
+    // $('#result3').text('일반 언더 : '+persent_n_over+'%'+' 일반 오버 : '+persent_n_under+'%')
+    // $('#result4').text('파워 언더 : '+persent_p_over+'%'+' 파워 오버 : '+persent_p_under+'%')
+    // $('#result6').text('소 : '+persent_small+'%'+' 중 : '+persent_midium+'%'+' 대 : '+persent_large+'%')
 
     //original
-    // $('#result').text('일반 홀 : '+persent_normal+'%'+' 일반 짝 : '+persent_normal2+'%')
-    // $('#result2').text('파워 홀 : '+persent_power+'%'+' 파워 짝 : '+persent_power2+'%')
-    //$('#result3').text('일반 언더 : '+persent_n_under+'%'+' 일반 오버 : '+persent_n_over+'%')
-    //$('#result4').text('파워 언더 : '+persent_p_under+'%'+' 파워 오버 : '+persent_p_over+'%')
-    // $('#result6').text('소 : '+persent_small+'%'+' 중 : '+persent_midium+'%'+' 대 : '+persent_large+'%')
+    $('#result').text('일반 홀 : '+persent_normal+'%'+' 일반 짝 : '+persent_normal2+'%')
+    $('#result2').text('파워 홀 : '+persent_power+'%'+' 파워 짝 : '+persent_power2+'%')
+    $('#result3').text('일반 언더 : '+persent_n_under+'%'+' 일반 오버 : '+persent_n_over+'%')
+    $('#result4').text('파워 언더 : '+persent_p_under+'%'+' 파워 오버 : '+persent_p_over+'%')
+    $('#result6').text('소 : '+persent_small+'%'+' 중 : '+persent_midium+'%'+' 대 : '+persent_large+'%')
 
 
     //past
