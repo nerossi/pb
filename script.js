@@ -436,7 +436,7 @@ function SHA256(s){
 }
 
 function randomString() {
-    var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZ";
+    var chars = "0123456789ABCDEF";
     var string_length = 5;
     var randomstring = '';
     for (var i=0; i<string_length; i++) {
