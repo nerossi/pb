@@ -70,9 +70,11 @@ async function ee() {
             // let random_data = randomString()
             // console.log(random_data)
 
-            let temp_hash = SHA256(''+ SHA256(''+block_number) + y);
-            temp_hash = temp_hash.slice(-5, temp_hash.length)
-            let temp_result = temp_hash.toUpperCase()
+            let temp_hash = randomString();
+            console.log('temp_hash',temp_hash)
+            //let temp_hash = SHA256(''+ SHA256(''+block_number) + y);
+            //temp_hash = temp_hash.slice(-5, temp_hash.length)
+            //let temp_result = temp_hash.toUpperCase()
             $('#result5').append(''+temp_result+'&')
 
             let test = await main_e((block_number),temp_result);
@@ -433,8 +435,8 @@ function SHA256(s){
 }
 
 function randomString() {
-    var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
-    var string_length = 176;
+    var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZ";
+    var string_length = 5;
     var randomstring = '';
     for (var i=0; i<string_length; i++) {
         var rnum = Math.floor(Math.random() * chars.length);
