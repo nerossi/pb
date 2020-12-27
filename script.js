@@ -75,6 +75,7 @@ async function ee() {
             //let temp_hash = SHA256(''+ SHA256(''+block_number) + y);
             //temp_hash = temp_hash.slice(-5, temp_hash.length)
             //let temp_result = temp_hash.toUpperCase()
+            let temp_result = temp_hash.toUpperCase()
             $('#result5').append(''+temp_result+'&')
 
             let test = await main_e((block_number),temp_result);
