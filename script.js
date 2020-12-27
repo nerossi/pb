@@ -2,8 +2,7 @@
 let block_number = 0;
 let block_number2 = 0;
 let min = 0;
-let max = 40;
-
+let max = 50;
 async function diff(){
     $('#result5').empty();
     block_number = parseInt($('#block_number').val())
@@ -70,11 +69,11 @@ async function ee() {
             // let random_data = randomString()
             // console.log(random_data)
 
-            let temp_hash = randomString();
-            console.log('temp_hash',temp_hash)
-            //let temp_hash = SHA256(''+ SHA256(''+block_number) + y);
-            //temp_hash = temp_hash.slice(-5, temp_hash.length)
-            //let temp_result = temp_hash.toUpperCase()
+            // let temp_hash = randomString();
+            // console.log('temp_hash',temp_hash)
+           
+            let temp_hash = SHA256(''+ SHA256(''+(block_number-block_number2)) + y);
+            temp_hash = temp_hash.slice(-5, temp_hash.length)
             let temp_result = temp_hash.toUpperCase()
             $('#result5').append(''+temp_result+'&')
 
